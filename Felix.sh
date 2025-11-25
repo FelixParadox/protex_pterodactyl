@@ -83,8 +83,11 @@ install_protex() {
   sudo npm i -g yarn
 
   cd /var/www/pterodactyl
+
   yarn add react-feather
-  php artisan migrate
+
+  # Auto YES on production
+  php artisan migrate --force
   yarn build:production
   php artisan view:clear
 
@@ -127,7 +130,7 @@ while true; do
   clear
 
   case "$MENU_CHOICE" in
-    1) install_protex ;;  
+    1) install_protex ;;
     2) uninstall_protex ;;
     3) echo "Keluar."; exit 0 ;;
     *) echo -e "${RED}Pilihan tidak valid!${NC}" ;;
